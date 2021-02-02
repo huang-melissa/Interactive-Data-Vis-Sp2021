@@ -1,1 +1,2 @@
-console.log("Hello! Here's some new text.")
+console.log("This is going to make a pop-up alert.")
+alert("Welcome!")
