@@ -1,2 +1,1 @@
-console.log("Hello World")
-console.log("Here's another message")
+console.log("Hello! Here's some new text.")
