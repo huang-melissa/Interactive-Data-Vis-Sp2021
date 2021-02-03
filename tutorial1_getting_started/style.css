@@ -1,4 +1,43 @@
 body {
-    color: #e38690;     /* strawberry ice */
-    background-color: #d2b29b       /* toasted almond */
+    color: #965251;     /* marsala red */
+    background-color: #d2b29b;      /* toasted almond */
+    font-size: 12px;
+    font-weight: normal;
+    font-family: "Helvetica", "Verdana", sans-serif;  
+}
+
+h1 {
+    font-size: 30px; 
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h1, h2, h3, h4 {
+    font-weight: bold; 
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+a:link, a:visited, a:active {
+    color: #572c29;      /* chocolate */
+    font-size: 12px;
+    font-style: italic;
+    font-family: "Helvetica", "Verdana", sans-serif;  
+
+}
+
+a:hover {
+    color: #b38e50;      /* antique gold */
+    font-size: 12px;
+    font-style: italic;
+    font-family: "Helvetica", "Verdana", sans-serif;  
+
+}
+ul {
+    list-style-type: circle;
+}
+
+ol {
+    list-style-type: lower-roman;
 }
