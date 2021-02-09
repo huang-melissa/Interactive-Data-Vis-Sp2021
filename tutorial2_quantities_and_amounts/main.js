@@ -11,6 +11,8 @@ const height = window.innerHeight
 const xScale = d3.scaleBand()
     .domain(data.map(d=> d.activity))
     .range([0, window.innerWidth]) // visual variables
+    .paddingInner(.3)
+
 // yscale - linear, count
 const yScale = d3.scaleLinear()
     .domain([0, d3.max(data, d=> d.count)])
@@ -21,7 +23,20 @@ const svg = d3.select("#barchart")
     .attr("width", width)
     .attr("height", height)
 
-// bars 
+// bars
+// select element you want
+// map aka data join
+// draw elements or style 
+
+svg.selectAll("rect")
+    .data(data)
+    .join("rect")
+    .attr("width", xScale.bandwidth())
+    .attr("height", d=> height - yScale(d.count))
+    .attr("x", d=>xScale(d.activity))
+    .attr("y", d=>yScale(d.count))
+
+
 
 
 
