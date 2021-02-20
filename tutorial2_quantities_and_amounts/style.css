@@ -1,25 +1,22 @@
 body {
     color: #696969;     /* gray */
-    background-color: #ffffff;      /* white */
-    font-size: 10px;
+    background-color: #ececec;      /* white */
+    font-size: 11px;
     font-weight: normal;
-    font-family: "Helvetica", "Verdana", sans-serif;  
+    font-family: "Montserrat", "Helvetica", sans-serif;  
 }
 
 h1 {
-    font-size: 30px; 
+    font-size: 45px; 
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 25px;
 }
 
 h1, h2, h3, h4 {
     font-weight: bold; 
-    font-family: "Helvetica", "Verdana", sans-serif;
-
-svg { 
-    border: black 1px dotted;
-}
+    font-family: "Montserrat", "Helvetica", sans-serif;
 
 }
+
