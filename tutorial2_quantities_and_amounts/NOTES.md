@@ -13,80 +13,57 @@ If you find you're not able complete this week's assignment, reflecting on where
 
 ------------
 
-## Javascript notes
-```
-/* "A string" 'Also a string' `Another string`
-*/ 
+## Javascript notes from class
 
-/* dates can be strings or its own data type Date()
-*/ 
 
-/* object {
+"A string" 'Also a string' `Another string` 
+
+dates can be strings or its own data type Date() 
+
+object {
     key1: "value1", 
     key2: 3, 
     key3: [1, 2, 3],
     key4: { name: "aucher", height:5.4}
 }
-*/ 
 
-/* array [
+
+### array 
     [1, 2, 3]
 
     ["one", "two", 3]
 
     [ {label: "one", value: 1},
 {label:"two", value:2}]
-]
-*/
 
-/* variables
+
+
+### variables
 const myVariable = 'this is my constant var'
 
 let myVariable = 'this is my reassignable var'
 
 var myVariable = 'this is old syntax'
-*/ 
 
-/* string interpolation, dynamic string
+
+### string interpolation, dynamic string
 
 const myName = 'melissa' 
 
 `hello, my name is ${myName}` 
 
-backstrokes used instead */ 
-```
+backstrokes ` used instead 
 
-/* function expression
+### function expression
 function = myFunction(argument)
 
-vs _ 
 
-*/ 
+------------
+## Assignment Notes
 
-activity = ['running', 'chasing', 'climbing', 'eating' 'foraging']
+Using demo code, I had trouble placing an x-axis even when adapting y-axis code 
+(also cross checked other tutorials online)
 
-count = [730, 279, 658, 760, 1435]
+However, with the commented code on the bottom of main.js, which I experimented with and adapted from a bunch of resources, I am able to draw both axes. 
 
-// selects the first element
-d3.select("#chart")
-
-// selects all instances 
-d3.selectAll("rect.bar")
-    // map to all the data elements aka data join
-    .data([1,2,3])
-    // create rect for each data element
-    .join('rect')
-    //set class name
-    .attr("class", "bar")
-    .attr("y", d => d * 100)
-    .attr("x", (d, i => i*100 + 50))
-// i for index 
-// array[0] returns first value in array 
-
-
-
-
-    . chain action 
-
-
-
+I could also do interactivity with the bottom code, but could not get it to work with demo code. 
