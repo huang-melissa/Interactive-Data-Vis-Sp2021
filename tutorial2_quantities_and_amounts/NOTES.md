@@ -67,3 +67,5 @@ Using demo code, I had trouble placing an x-axis even when adapting y-axis code
 However, with the commented code on the bottom of main.js, which I experimented with and adapted from a bunch of resources, I am able to draw both axes. 
 
 I could also do interactivity with the bottom code, but could not get it to work with demo code. 
+
+Using the commented bottom code, I could not get the value labels to show up on the bars.
