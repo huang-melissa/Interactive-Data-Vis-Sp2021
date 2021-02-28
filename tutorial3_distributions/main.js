@@ -1,7 +1,7 @@
 /* CONSTANTS AND GLOBALS */
-const width = window.innerWidth * 0.7,
-  height = window.innerHeight * 0.7,
-  margin = { top: 20, bottom: 60, left: 60, right: 40 },
+const width = window.innerWidth * 0.80,
+  height = window.innerHeight * 0.85,
+  margin = { top: 20, bottom: 60, left: 60, right: 60 },
   radius = 5;
 
 // these variables allow us to access anything we manipulate in init() but need access to in draw().
@@ -13,14 +13,12 @@ let yScale;
 /* APPLICATION STATE */
 let state = {
   data: [],
-  selectedRegion: "All" // + YOUR INITIAL FILTER SELECTION
+  selectedParty: "All"
 };
 
 /* LOAD DATA */
 d3.csv("../data/WHR20.csv", d3.autoType).then(raw_data => {
-  // + SET YOUR DATA PATH
-  console.log("raw_data", raw_data);
-  // save our data to application state
+  console.log("data", raw_data);
   state.data = raw_data;
   init();
 });
@@ -28,79 +26,91 @@ d3.csv("../data/WHR20.csv", d3.autoType).then(raw_data => {
 /* INITIALIZING FUNCTION */
 // this will be run *one time* when the data finishes loading in
 function init() {
-  // + DEFINE SCALES
-  xScale = d3.scaleLinear()
-    .domain(d3.extent(state.data, d => d.social_support))
-    .range([margin.left, width - margin.right]); 
+  console.log('State:', state)
+  //SCALES
+    xScale = d3.scaleLinear()
+      .domain(d3.extent(state.data, d => d.social_support))
+      .range([margin.left, width - margin.right]) 
 
-  yScale = d3.scaleLinear()
-    .domain(d3.extent(state.data, d => d.ladder_score))
-    .range([height - margin.bottom, margin.top])
+    yScale = d3.scaleLinear()
+      .domain(d3.extent(state.data, d => d.ladder_score))
+      .range([height - margin.bottom, margin.top]) //our min value is at the bottom, max value is at the top of our svg 
 
-  colorScale = d3.scaleOrdinal()
-    .domain("Central and Eastern Europe", "Commonwealth of Independent States",
-    "East Asia", "Latin America and Caribbean", "Middle East and North Africa",
-    "North America and ANZ", "South Asia", "Southeast Asia", "Sub-Saharan Africa",
-    "Western Europe"])
-    .range(["orange", "blue", "purple", "pink", "red", "green",
-  "brown", "gray", "turquoise", "beige"])
+    colorScale = d3.scaleLinear()
+      .domain(d3.extent(state.data, d => d.ladder_score))
+      .range(["#a683da", "#56d668"])
 
-  // + DEFINE AXES
-  const xAxis = d3.axisBottom(xScale);
-  const yAxis = d3.axisLeft(yScale); 
+  //AXES
+    const xAxis = d3.axisBottom(xScale)
+    const yAxis = d3.axisLeft(yScale)
 
-  // + UI ELEMENT SETUP
-  const selectElement = d3.select("#dropdown").on("change", function() {
-    console.log("Selected region is", this.value); //select dropdown from HTML
+  //Creating SVG
+    svg = d3.select("#d3-container")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
 
-    draw(); // re-draw the graph based on this new selection
-  }); 
-  // + add dropdown options
-  selectElement
-    .selectAll("option")
-    .data([
+  //Adding Axes
+    svg.append("g")
+      .attr("class", "xAxis")
+      .attr("transform", `translate(${0}, ${height - margin.bottom})`)
+      .call(xAxis)
+      .append("text")
+      .attr("class", 'axis-title')
+      .attr("x", width / 2)
+      .attr("y", 40)
+      .attr("font-size", 10)
+      .attr("font-weight", "bold")
+      .attr("letter-spacing", "0.2em")
+      .attr("style", "fill: #696969")
+      .attr("text-anchor", "middle")
+      .text("Social Support")
+
+    svg.append("g")
+      .attr("class", "yAxis")
+      .attr("transform", `translate(${margin.left}, ${0})`)
+      .call(yAxis)
+      .append("text")
+      .attr("class", 'axis-title')
+      .attr("x", -40)
+      .attr("y", height / 2)
+      .attr("font-size", 10)
+      .attr("font-weight", "bold")
+      .attr("letter-spacing", "0.2em")
+      .attr("style", "fill: #696969; writing-mode: tb; glyph-orientation-vertical: 0")
+      // .attr("writing-mode", "vertical-rl")
+      .attr("text-anchor", "middle")
+      .text("Happiness Score")
+
+    //SETUP  UI ELEMENTS
+    const dropdown = d3.select("#dropdown") 
+      
+    dropdown.selectAll("options")
+      .data([
       {key: "All", label: "All"}, 
-      {key: "Central and Eastern Europe", label: "Central & Eastern Europe"} 
-      {key: "Commonwealth of Independent States", label: "Commonwealth of Independent States"}
-      {key: "East Asia", label: "East Asia"}
-      {key: "Latin America and Caribbean", label: "Latin America & Caribbean"}
-      {key: "Middle East and North Africa", label: "Middle East & North Africa"}
-      {key: "North America and ANZ", label: "North America & ANZ"}
-      {key: "South Asia", label: "South Asia"}
-      {key: "Southeast Asia", label: "Southeast Asia"}
-      {key: "Sub-Saharan Africa", label: "Sub-Saharan Africa"}
+      {key: "Central and Eastern Europe", label: "Central & Eastern Europe"}, 
+      {key: "Commonwealth of Independent States", label: "Commonwealth of Independent States"},
+      {key: "East Asia", label: "East Asia"},
+      {key: "Latin America and Caribbean", label: "Latin America & Caribbean"},
+      {key: "Middle East and North Africa", label: "Middle East & North Africa"},
+      {key: "North America and ANZ", label: "North America & ANZ"},
+      {key: "South Asia", label: "South Asia"},
+      {key: "Southeast Asia", label: "Southeast Asia"},
+      {key: "Sub-Saharan Africa", label: "Sub-Saharan Africa"},
       {key: "Western Europe", label: "Western Europe"}])
-    .join("option")
-    .attr("value", d => d.key) // set the key to value so we can filter data
-    .text(d => d.label); // set label to text for viewer's purpose
+      .join("option")
+      .attr("value", d => d.key)
+      .text(d => d.label)
+    
+    dropdown.on("change", event => {
+      console.log("DROP DOWN IS CHANGED", event.target.value) 
+      state.selectedParty = event.target.value
+      console.log("NEW STATE", state)
+      draw();
+    })
 
-  // + add event listener for 'change'
-  selectElement.on("change"), event => {
-    // 'event' holds event info that triggers this callback
-    console.log("DROPDOWN CALLBACK: new value is", event.target.value)
-    // save new selection to application state
-    state.selectedRegion = event.target.value
-    console.log("NEW STATE:", state);
-    draw(); // re-draw graph based on new filter selection
-  }); 
+      draw();
 
-  // + CREATE SVG ELEMENT
-  svg = d3.select("d3-container")
-    .append("svg")
-    .attr("width", width)
-    .attr("height, height")
-
-  // + CREATE AXES
-  const xAxisGroup = svg.append("g")
-    .attr("class", 'xAxis')
-    .attr("transform", `translate(${0}, ${height - margin.bottom})`) // move to bottom
-    .call(xAxis)
-
-  const yAxisGroup = svg.append("g")
-    .attr("class", 'yAxis')
-    .attr("transform", `translate(${margin.left}, ${0})`) // alight with left margin
-
-  // draw(); // calls the draw function
 }
 
 /* DRAW FUNCTION */
@@ -108,43 +118,53 @@ function init() {
 function draw() {
 
   // + FILTER DATA BASED ON STATE
-  const filteredData = state.data 
-    .filter(d => state.selectedRegion === "All" || state.selectedRegion === d.regional_indicator// <--- update to filter
+  const filteredData = state.data
+  .filter(d => {
+    if (state.selectedParty === "All") return true 
+    else return d.regional_indicator === state.selectedParty
+  })
 
-  // + DRAW CIRCLES
-  const dot = svg
-    .selectAll("circle")
-    .data(filteredData, d => d.country_name) // second argument is the unique key for that row
+  svg.selectAll("circle")
+    .data(filteredData, d => d.country_name) //arbitrary ID# to make each data point unique   
     .join(
-      // + HANDLE ENTER SELECTION
-      enter => enter.append("circle"),
-        .attr("r", radius)
-        .attr("fill", d => colorScale(d.regional_indicator))
-        .attr("cx", d => yScale(d.ladder_score))
-        .call(sel => sel.transition()
-          .duration(500)
-          .attr("cx", d => xScale(d.social_support)) // transition to correct position
+        enter => enter.append("circle")
+          .attr("r", radius)
+          .attr("fill", d => colorScale(d.ladder_score))
+          // .attr("fill", d => {
+          // if (d.regional_indicator === "Western Europe") return "#5582f9"
+          // else return "#fa55ed"
+          // })
+          .style("stroke-opacity", .50)
+          .style("stroke", "#696969")
+          .attr("cy", margin.top)
+          .attr("cx", d => xScale(d.social_support))
+          .call(enter => enter
+            .transition()
+            .ease(d3.easeCircleIn)
+            .duration(1000)
+            .attr("cy", d => yScale(d.ladder_score))
           ),
 
-      // + HANDLE UPDATE SELECTION
-      update => update
-        .call(sel => sel)
-          .transition()
-          .duration(250)
-          .attr("r", radius * 1.5) // increase radius size
-          .transition()
-          .duration(250)
-          .attr("r", radius) // bring back to orignal size
-      ),
-
-      // + HANDLE EXIT SELECTION
-      exit => exit.remove()
-      .call(sel => sel
-        .attr("opacity", 1)
-        .transition()
-        .duration(500)
-        .attr("opacity", 0)
-        .remove()
-      )
-    );
+        update => update
+            .call(sel => sel
+              .transition()
+              .duration(250)
+              .attr("r", radius * 1.5)
+              .transition()
+              .duration(500)
+              .attr("r", radius)
+           ),
+           
+        exit => exit
+          .attr("cy", d => yScale(d.ladder_score))
+          .attr("cx", d => xScale(d.social_support))
+            .call(exit => exit
+              .transition()
+              .style("opacity", .25)
+              .duration(1000)
+              .attr("cx", width - margin.right)
+              .attr("cy", height / 2)
+              .remove()
+          )
+      );
 }

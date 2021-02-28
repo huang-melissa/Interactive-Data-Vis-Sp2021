@@ -17,3 +17,8 @@ h2 {
 h1, h2, h3, h4 {
     font-weight: bold; 
     font-family: "Montserrat", "Helvetica", sans-serif;
+}
+/* 
+svg {
+    border: black 1px dashed; */
+}
