@@ -22,8 +22,9 @@ h1, h2, h3, h4 {
     font-family: "Montserrat", "Helvetica", sans-serif;
 }
 
-b {
+u {
     color: #a2b86a; /* granny smith */
+    letter-spacing: 2px; 
 }
 
 i {
