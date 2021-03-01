@@ -23,11 +23,12 @@ h1, h2, h3, h4 {
 }
 
 b {
-    color: #a2b86a;
+    color: #a2b86a; /* granny smith */
 }
 
 i {
-    color: #f5b845;
+    color: #f5b845; /* mustard */
+    letter-spacing: 2px;
 }
 
 p {
@@ -35,4 +36,6 @@ p {
     position: absolute;
     left: 225px;
     top: 40px;
+    letter-spacing: 0.7px;
+    line-height: 15px;
 }

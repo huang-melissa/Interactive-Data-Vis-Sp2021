@@ -29,7 +29,7 @@ function init() {
   console.log('State:', state)
   //SCALES
     xScale = d3.scaleLinear()
-      .domain(d3.extent(state.data, d => d.social_support))
+      .domain(d3.extent(state.data, d => d.healthy_life))
       .range([margin.left, width - margin.right]) 
 
     yScale = d3.scaleLinear()
@@ -64,7 +64,7 @@ function init() {
       .attr("letter-spacing", "0.2em")
       .attr("style", "fill: #ffffff")
       .attr("text-anchor", "middle")
-      .text("Social Support")
+      .text("Healthy Life Expectancy")
 
     svg.append("g")
       .attr("class", "yAxis")
@@ -137,7 +137,7 @@ function draw() {
           .style("stroke-opacity", .50)
           .style("stroke", "#ffffff")
           .attr("cy", margin.top)
-          .attr("cx", d => xScale(d.social_support))
+          .attr("cx", d => xScale(d.healthy_life))
           .call(enter => enter
             .transition()
             .ease(d3.easeCircleIn)
@@ -157,7 +157,7 @@ function draw() {
            
         exit => exit
           .attr("cy", d => yScale(d.ladder_score))
-          .attr("cx", d => xScale(d.social_support))
+          .attr("cx", d => xScale(d.healthy_life))
             .call(exit => exit
               .transition()
               .style("opacity", .25)
