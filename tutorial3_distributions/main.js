@@ -1,6 +1,6 @@
 /* CONSTANTS AND GLOBALS */
-const width = window.innerWidth * 0.80,
-  height = window.innerHeight * 0.85,
+const width = window.innerWidth * 0.70,
+  height = window.innerHeight * 0.70,
   margin = { top: 20, bottom: 60, left: 60, right: 60 },
   radius = 5;
 
@@ -38,7 +38,7 @@ function init() {
 
     colorScale = d3.scaleLinear()
       .domain(d3.extent(state.data, d => d.ladder_score))
-      .range(["#a683da", "#56d668"])
+      .range(["#2a8d8c", "#f5b845"])
 
   //AXES
     const xAxis = d3.axisBottom(xScale)
@@ -62,7 +62,7 @@ function init() {
       .attr("font-size", 10)
       .attr("font-weight", "bold")
       .attr("letter-spacing", "0.2em")
-      .attr("style", "fill: #696969")
+      .attr("style", "fill: #ffffff")
       .attr("text-anchor", "middle")
       .text("Social Support")
 
@@ -77,7 +77,7 @@ function init() {
       .attr("font-size", 10)
       .attr("font-weight", "bold")
       .attr("letter-spacing", "0.2em")
-      .attr("style", "fill: #696969; writing-mode: tb; glyph-orientation-vertical: 0")
+      .attr("style", "fill: #ffffff; writing-mode: tb; glyph-orientation-vertical: 0")
       // .attr("writing-mode", "vertical-rl")
       .attr("text-anchor", "middle")
       .text("Happiness Score")
@@ -103,9 +103,9 @@ function init() {
       .text(d => d.label)
     
     dropdown.on("change", event => {
-      console.log("DROP DOWN IS CHANGED", event.target.value) 
+      console.log("selection changed", event.target.value) 
       state.selectedParty = event.target.value
-      console.log("NEW STATE", state)
+      console.log("updated state", state)
       draw();
     })
 
@@ -135,7 +135,7 @@ function draw() {
           // else return "#fa55ed"
           // })
           .style("stroke-opacity", .50)
-          .style("stroke", "#696969")
+          .style("stroke", "#ffffff")
           .attr("cy", margin.top)
           .attr("cx", d => xScale(d.social_support))
           .call(enter => enter

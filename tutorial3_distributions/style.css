@@ -1,6 +1,6 @@
 body {
-    color: #696969;     /* gray */
-    background-color: #ececec;      /* white */
+    color: #ffffff;     /* white */
+    background-color: #646563;      /* dark gray */
     font-size: 11px;
     font-weight: normal;
     font-family: "Montserrat", "Helvetica", sans-serif;  
@@ -12,13 +12,27 @@ h1 {
 
 h2 {
     font-size: 25px;
+    position: absolute; 
+    left: 225px; 
+    top: -15px;
 }
 
 h1, h2, h3, h4 {
     font-weight: bold; 
     font-family: "Montserrat", "Helvetica", sans-serif;
 }
-/* 
-svg {
-    border: black 1px dashed; */
+
+b {
+    color: #a2b86a;
+}
+
+i {
+    color: #f5b845;
+}
+
+p {
+    width: 710px;
+    position: absolute;
+    left: 225px;
+    top: 40px;
 }
