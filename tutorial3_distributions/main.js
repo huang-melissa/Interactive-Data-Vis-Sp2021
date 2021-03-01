@@ -78,7 +78,6 @@ function init() {
       .attr("font-weight", "bold")
       .attr("letter-spacing", "0.2em")
       .attr("style", "fill: #ffffff; writing-mode: tb; glyph-orientation-vertical: 0")
-      // .attr("writing-mode", "vertical-rl")
       .attr("text-anchor", "middle")
       .text("Happiness Score")
 
@@ -130,10 +129,6 @@ function draw() {
         enter => enter.append("circle")
           .attr("r", radius)
           .attr("fill", d => colorScale(d.ladder_score))
-          // .attr("fill", d => {
-          // if (d.regional_indicator === "Western Europe") return "#5582f9"
-          // else return "#fa55ed"
-          // })
           .style("stroke-opacity", .50)
           .style("stroke", "#ffffff")
           .attr("cy", margin.top)
