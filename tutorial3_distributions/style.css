@@ -32,6 +32,10 @@ i {
     letter-spacing: 2px;
 }
 
+b {
+    color: #ffffff;
+}
+
 p {
     width: 710px;
     position: absolute;
