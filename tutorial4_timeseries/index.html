@@ -1,13 +1,17 @@
 <!DOCTYPE html>
   <head>
     <meta charset="utf-8">
-    <title>Interactive Data Visualization Tutorial</title>
+    <title>Line/area chart: Interactive Data Visualization Tutorial 4</title>
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    Welcome to Interactive Data Visualization Tutorials
-    <label for="dropdown">Filter Selection</label>
+   <h2> Socioeconomic Status around the world over the years </h2>
+   <p>Here, you will find estimates of the socioeconomic status (SES) percentile scores of various countries across the globe over a 130-year timeframe.
+   Data source: <a href="https://www.kaggle.com/sdorius/globses">kaggle</a>.
+   </p>
+    <label for="dropdown">Country:</label>
     <select id="dropdown" name="dropdown"></select>
+    <div id="d3-container"> </div>
     <script src="../lib/d3.js"></script>
     <script src="main.js"></script>
   </body>
