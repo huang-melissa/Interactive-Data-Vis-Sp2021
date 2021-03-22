@@ -1,0 +1,64 @@
+.hover-content{
+    top: 0;
+    left: 0;
+    max-width: 200px;
+    background-color: #cfb4cf; /* darker light pink */ 
+    padding: .10em;
+    opacity: .85;
+    /* need to remove pointer events so that
+    the tooltip doesn't interrupt the mouse events */
+    pointer-events: none;
+    border-radius: 5px;
+    box-shadow: 0 0 7px gainsboro;
+  }
+  
+
+  .hover-content.visible{
+    opacity: .95;
+    font-size: 12px;
+  }
+  
+  body {
+    background-color: #e3aacd; /*light pink */
+    font-size: 16px;
+    font-weight: normal;
+    font-family: "Amatic SC", "Helvetica", sans-serif; 
+    color: white;
+}
+ 
+  
+  h1 {
+      color: white;
+      text-align: Center;
+      font-size: 50px;
+      font-weight: bold; 
+      font-family: "Meddon", serif;
+      letter-spacing: 1px; 
+  }
+
+  h2 {
+    color: white;
+    text-align: Center;
+    font-weight: normal; 
+    font-size: 15px;
+    letter-spacing: 3px;
+    font-family: "Meddon", serif;
+}
+  div {
+  
+      padding: 10px;
+      text-align: Center;
+  }
+  
+  text {
+    fill : white;
+  }
+  
+  p{
+      text-align: center;
+
+  }
+  svg{
+      font-family: "Zeyada", "Montesserat", serif;
+  }
+  
